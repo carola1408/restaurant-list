@@ -23,13 +23,16 @@ db.once('open', () => {
 
 //定義要使用連接埠號 (port number)  define server related variables
 const port = 3000
+// require express-handlebars here 設定在 Express 中使用的樣版引擎
+const exphbs = require('express-handlebars')
 
-
-
+// setting template engine
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
 
 // 設定首頁路由
 app.get('/', (req, res) => {
-  res.send('hello world')
+  res.render('index')
 
 })
 
