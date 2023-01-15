@@ -72,12 +72,11 @@ header {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #39338f;
 }
 
 .restaurant-category {
   color: #39338f;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .restaurant-show-title {
@@ -90,6 +89,15 @@ header {
 
 .restaurant-badge {
   color: #39338f;
+}
+
+#map {
+  color: lightskyblue;
+  font-size: 16px;
+}
+
+#map:hover {
+  color: blue;
 }
 
 @media screen and (max-width: 992px) {

@@ -1,13 +1,16 @@
 // 載入 express 並建構應用程式伺服器
 const express = require('express')
 const mongoose = require('mongoose') // 載入 mongoose
+const app = express()
+const port = 3000 // 定義要使用連接埠號(port number) 
+const exphbs = require('express-handlebars') // require express-handlebars 
+const restaurantList = require('./restaurant.json') // 載入 JSON
 
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-const app = express()
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
 
 // 取得資料庫連線狀態
@@ -21,11 +24,6 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-//定義要使用連接埠號 (port number)  define server related variables
-const port = 3000
-// require express-handlebars here 設定在 Express 中使用的樣版引擎
-const exphbs = require('express-handlebars')
-const restaurantList = require('./restaurant.json') // 載入 JSON
 
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -41,10 +39,12 @@ app.get('/', (req, res) => {
 
 })
 
+//應用 params 打造動態路由
 app.get('/:restaurants_id', (req, res) => {
   const restaurants = restaurantList.results.find(restaurants => restaurants.id.toString() === req.params.restaurants_id)
   res.render('show', { restaurants: restaurants })
 })
+
 //啟動並監聽伺服器 Listen the server when it started
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
