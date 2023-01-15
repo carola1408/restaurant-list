@@ -39,11 +39,22 @@ app.get('/', (req, res) => {
 
 })
 
+//設定search路由
+app.get('/search', (req, res) => {
+  console.log('req keyword', req.query.keyword)
+  const keyword = req.query.keyword
+  const restaurants = restaurantList.results.filter((restaurant) => {
+    return restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase())
+  })
+  res.render('index', { restaurants: restaurants, keyword: keyword })
+})
+
 //應用 params 打造動態路由
 app.get('/:restaurants_id', (req, res) => {
   const restaurants = restaurantList.results.find(restaurants => restaurants.id.toString() === req.params.restaurants_id)
   res.render('show', { restaurants: restaurants })
 })
+
 
 //啟動並監聽伺服器 Listen the server when it started
 app.listen(port, () => {

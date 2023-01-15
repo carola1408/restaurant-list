@@ -82,9 +82,10 @@ header {
 .restaurant-show-title {
   position: relative;
   top: -100px;
-  color: rgb(70, 105, 29);
+  color: white;
   text-align: center;
   font-size: 3rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .restaurant-badge {
