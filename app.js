@@ -41,19 +41,9 @@ app.get('/', (req, res) => {
 
 })
 
-app.get('/1', (req, res) => {
-  const restaurantOne = {
-    id: 1,
-    name: '布娜飛比利時啤酒餐廳',
-    category: ' 義式餐廳',
-    location: '台北市松山區市民大道四段 185 號',
-    phone: '02 2570 1255',
-    description:
-      'Several years after the demise of Jurassic World, a volcanic eruption threatens the remaining dinosaurs on the island of Isla Nublar. Claire Dearing, the former park manager and founder of the Dinosaur Protection Group, recruits Owen Grady to help prevent the extinction of the dinosaurs once again.',
-    release_date: '2018-06-06',
-    image: 'https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5634/08.jpg'
-  }
-  res.render('show', { restaurants: restaurantOne })
+app.get('/:restaurants_id', (req, res) => {
+  const restaurants = restaurantList.results.find(restaurants => restaurants.id.toString() === req.params.restaurants_id)
+  res.render('show', { restaurants: restaurants })
 })
 //啟動並監聽伺服器 Listen the server when it started
 app.listen(port, () => {
