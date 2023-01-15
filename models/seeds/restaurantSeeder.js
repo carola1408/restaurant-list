@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const restaurant = require('../restaurant') // 載入 restaurant model
+const restaurant = require('../../restaurant.json') // 載入 JSON
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }

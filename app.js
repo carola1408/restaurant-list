@@ -5,7 +5,7 @@ const app = express()
 const port = 3000 // 定義要使用連接埠號(port number) 
 const exphbs = require('express-handlebars') // require express-handlebars 
 const restaurantList = require('./restaurant.json') // 載入 JSON
-
+const restaurant = require('./models/restaurant')
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
