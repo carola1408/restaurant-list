@@ -5,7 +5,7 @@ const app = express()
 const port = 3000 // 定義要使用連接埠號(port number) 
 const exphbs = require('express-handlebars') // require express-handlebars 
 const restaurantList = require('./restaurant.json') // 載入 JSON
-const restaurant = require('./models/restaurant')
+const restaurant = require('./models/restaurant') //載入restaurant model
 const bodyParser = require('body-parser')  // 引用 body-parser
 
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
@@ -39,7 +39,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // 設定首頁路由
 app.get('/', (req, res) => {
   // pass the restaurant data into 'index' partial template
-  res.render('index', { restaurants: restaurantList.results })
+  restaurant.find()  // 取出 Todo model 裡的所有資料
+    .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+    .then(restaurants => res.render('index', { restaurants: restaurantList.results })) // 將資料傳給 index 樣板
+    .catch(error => console.log(error)) //錯誤處理
 
 })
 
