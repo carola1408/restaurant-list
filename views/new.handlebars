@@ -1,0 +1,72 @@
+<div class="p-3 mt-3">
+  <form action="/restaurants" method="POST" class="font-weight-light">
+    <!-- 餐廳中文名稱  -->
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label">餐廳中文名稱</label>
+      <div class="col-sm-10">
+        <input type="text" placeholder="中文名稱" name="name" id="name" required>
+      </div>
+    </div>
+    <!-- 餐廳英文名稱  -->
+    <div class="form-group row">
+      <label for="name_en" class="col-sm-2 col-form-label">餐廳英文名稱</label>
+      <div class="col-sm-10">
+        <input type="text" placeholder="英文名稱" name="name_en" id="name_en" required>
+      </div>
+    </div>
+    <!-- 餐廳類別  -->
+    <div class="form-group row">
+      <label for="name_en" class="col-sm-2 col-form-label">餐廳類別</label>
+      <div class="col-sm-10">
+        <input type="text" placeholder="料理類別" name="category" id="category" required>
+      </div>
+    </div>
+    <!-- 餐廳照片網址  -->
+    <div class="form-group row">
+      <label for="image" class="col-sm-2 col-form-label">餐廳照片網址</label>
+      <div class="col-sm-10">
+        <input type="text" placeholder="網址" name="image" id="image">
+      </div>
+    </div>
+    <!-- 餐廳地點  -->
+    <div class="form-group row">
+      <label for="location" class="col-sm-2 col-form-label">餐廳地點</label>
+      <div class="col-sm-10">
+        <input type="text" name="location" name="location" id="location" placeholder="地址">
+      </div>
+    </div>
+
+    <!-- 餐廳電話  -->
+    <div class="form-group row">
+      <label for="phone" class="col-sm-2 col-form-label">餐廳電話</label>
+      <div class="col-sm-10">
+        <input type="text" placeholder="請輸入包含區碼的電話" name="phone" id="phone">
+      </div>
+    </div>
+
+    <!-- 餐廳Google Map  -->
+    <div class="form-group row">
+      <label for="google_map" class="col-sm-2 col-form-label">Google_Map</label>
+      <div class="col-sm-10">
+        <input type="text" placeholder="map網址" name="google_map" id="google_map">
+      </div>
+    </div>
+
+    <!-- 餐廳評分  -->
+    <div class="form-group row">
+      <label for="rating" class="col-sm-2 col-form-label">餐廳評分</label>
+      <div class="col-sm-10">
+        <input type="text" placeholder="分數" name="rating" id="rating" required>
+      </div>
+    </div>
+    <!-- 餐廳簡介  -->
+    <div class="form-group row">
+      <label for="description" class="col-sm-2 col-form-label">餐廳簡介</label>
+      <div class="col-sm-10">
+        <textarea name="description" id="description" cols="48" rows="3"></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary " name="createItem">新增</button>
+  </form>
+</div>

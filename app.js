@@ -6,6 +6,8 @@ const port = 3000 // 定義要使用連接埠號(port number)
 const exphbs = require('express-handlebars') // require express-handlebars 
 const restaurantList = require('./restaurant.json') // 載入 JSON
 const restaurant = require('./models/restaurant')
+const bodyParser = require('body-parser')  // 引用 body-parser
+
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -24,13 +26,15 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 // setting static files
 app.use(express.static('public'))
+
+// 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // 設定首頁路由
 app.get('/', (req, res) => {
@@ -55,7 +59,20 @@ app.get('/:restaurants_id', (req, res) => {
   res.render('show', { restaurants: restaurants })
 })
 
+//打造瀏覽所有資料路由
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
 
+//打造新增資料路由
+app.post('/restaurants', (req, res) => {
+  const name = req.body.name       // 從 req.body 拿出表單裡的 name 資料
+  const restaurants = new restaurant({ name })
+  return restaurants.save()
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+
+})
 //啟動並監聽伺服器 Listen the server when it started
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
