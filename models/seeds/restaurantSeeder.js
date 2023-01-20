@@ -12,7 +12,7 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
   for (let i = 0; i < restaurantList.length; i++) {
-    restaurant.create({ restaurantList })
+    restaurant.create({ restaurant: restaurantList.results })
   }
   console.log('done')
 })
