@@ -39,9 +39,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // 設定首頁路由
 app.get('/', (req, res) => {
   // pass the restaurant data into 'index' partial template
-  restaurant.find()  // 取出 Todo model 裡的所有資料
+  restaurant.find()  // 取出 restaurant model 裡的所有資料
     .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-    .then(restaurants => res.render('index', { restaurants: restaurantList.results })) // 將資料傳給 index 樣板
+    .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
     .catch(error => console.log(error)) //錯誤處理
 
 })
