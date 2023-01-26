@@ -76,6 +76,15 @@ app.post('/restaurants', (req, res) => {
     .catch(error => console.log(error))
 
 })
+
+// 打造資料路由
+app.get('/:restaurants_id', (req, res) => {
+  const id = req.params.id
+  return restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('detail', { restaurant }))
+    .catch(error => console.log(error))
+})
 //啟動並監聽伺服器 Listen the server when it started
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
