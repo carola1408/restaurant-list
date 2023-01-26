@@ -62,7 +62,7 @@ app.get('/:restaurants_id', (req, res) => {
   res.render('show', { restaurants: restaurants })
 })
 
-//打造瀏覽所有資料路由--連結失敗
+//打造瀏覽所有資料路由
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
