@@ -62,16 +62,25 @@ app.get('/:restaurants_id', (req, res) => {
   res.render('show', { restaurants: restaurants })
 })
 
-//打造瀏覽所有資料路由
+//打造瀏覽New頁面路由
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
 
-//打造新增資料路由
+//將新增的資料存資料庫
 app.post('/restaurants', (req, res) => {
-  const name = req.body.name       // 從 req.body 拿出表單裡的 name 資料
-  const restaurants = new restaurant({ name })
-  return restaurants.save()
+  const id = req.body.id
+  const name = req.body.name
+  const name_en = req.body.name_en
+  const category = req.body.category
+  const image = req.body.image
+  const location = req.body.location
+  const phone = req.body.phone
+  const google_map = req.body.google_map
+  const rating = req.body.rating
+  const description = req.body.description
+  // 存入資料庫
+  return restaurant.create({ id, name, name_en, category, image, location, phone, google_map, rating, description })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 
