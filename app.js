@@ -94,6 +94,41 @@ app.get('/restaurants/:id', (req, res) => {
     .then((restaurants) => res.render('show', { restaurants }))
     .catch(error => console.log(error))
 })
+
+// 打造編輯路由
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+// 控制編輯路由
+app.post('/restaurants/:id/restaurants//edit', (req, res) => {
+  const id = req.params.id
+  const name = req.body.name
+  const category = req.body.category
+  const location = req.body.location
+  const phone = req.body.phone
+  const google_map = req.body.google_map
+  const rating = req.body.rating
+  const description = req.body.description
+
+  return restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.name = name
+      restaurant.category = category
+      restaurant.location = location
+      restaurant.phone = phone
+      restaurant.google_map = google_map
+      restaurant.rating = rating
+      restaurant.description = description
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
 //啟動並監聽伺服器 Listen the server when it started
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
