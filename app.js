@@ -87,11 +87,11 @@ app.post('/restaurants', (req, res) => {
 })
 
 // 打造資料路由
-app.get('/:restaurants_id', (req, res) => {
+app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return restaurant.findById(id)
     .lean()
-    .then((restaurant) => res.render('detail', { restaurant }))
+    .then((restaurants) => res.render('show', { restaurants }))
     .catch(error => console.log(error))
 })
 //啟動並監聽伺服器 Listen the server when it started
