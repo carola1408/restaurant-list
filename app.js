@@ -129,6 +129,16 @@ app.post('/restaurants/:id/restaurants//edit', (req, res) => {
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 })
+
+// 打造刪除路由
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id //取得網址上的識別碼，用來查詢使用者想刪除的 To-do
+  return restaurant.findById(id) //查詢資料
+    .then(restaurant => restaurant.remove()) //刪除這筆資料
+    .then(() => res.redirect('/')) //重新呼叫首頁
+    .catch(error => console.log(error))
+})
+
 //啟動並監聽伺服器 Listen the server when it started
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)

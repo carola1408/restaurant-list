@@ -9,6 +9,7 @@
             value="{{keyword}}" aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            <a href="/restaurants/new" class="btn btn-major ">新增餐廳</a>
           </div>
         </div>
       </form>
@@ -39,15 +40,14 @@
                     {{this.rating}}
                     <i class="fas fa-star fa-xs"></i>
                   </span>
-                  <div class="card-footer py-3">
-                    <div class="row justify-content-center">
-                      <a class="btn btn-sm btn-info col-lg-3 col-10 my-1 mx-1" href="./restaurants/new">新增</a>
-                      <a class="btn btn-sm btn-info col-lg-3 cp;-10 my-1 mx-1" href="./restaurants/{{this._id}}">資料</a>
-                      <a class="btn btn-sm btn-info col-lg-3 cp;-10 my-1 mx-1"
-                        href="./restaurants/{{this._id}}/edit">編輯</a>
-                    </div>
-                  </div>
 
+                  <div class="card-footer d-flex justify-content-end flex-wrap">
+                    <a href="/restaurants/{{this._id}}/edit" class="btn btn-info ms-2">編輯</a>
+                    <a href="/restaurants/{{this._id}}" class="btn btn-info ms-2">資料</a>
+                    <form action="./restaurants/{{this._id}}/delete" method="POST" style="display: inline;">
+                      <button class="btn btn-info  ms-2" type="submit">刪除</button>
+                    </form>
+                  </div>
                 </div>
               </div>
             </a>
