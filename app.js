@@ -48,12 +48,19 @@ app.get('/', (req, res) => {
 
 //設定search路由
 app.get('/search', (req, res) => {
-  console.log('req keyword', req.query.keyword)
   const keyword = req.query.keyword
-  const restaurants = restaurantList.results.filter((restaurant) => {
-    return restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase())
-  })
-  res.render('index', { restaurants: restaurants, keyword: keyword })
+  restaurant.find()
+    .lean()
+    .then(restaurants => {
+      return restaurants.filter(restaurant => {
+        if (restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase())) {
+          return true
+        } else if (restaurant.category.toLowerCase().includes(req.query.keyword.toLowerCase())) {
+          return true
+        }
+      })
+    })
+    .then((restaurants, keyword) => res.render('index', { restaurants, keyword }))
 })
 
 //應用 params 打造動態路由
