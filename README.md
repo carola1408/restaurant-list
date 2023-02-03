@@ -5,7 +5,7 @@
 ## ※安裝與執行步驟 (installation and execution)：
 ### 1. 打開你的 terminal(終端機)，Clone(複製) 此專案至本機電腦
 
-###    git clone https://github.com/carola1408/restaurantlist.git
+###  git clone  https://github.com/carola1408/restaurant-list
 ### 2. 開啟終端機(Terminal)，進入存放此專案的資料夾
 
 ### cd restaurant_list
