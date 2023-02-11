@@ -21,9 +21,13 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
   for (let i = 0; i < restaurantList.length; i++) {
-    restaurant.create(restaurantList[i])
+    restaurant.create(restaurantList)
+      .then(() => {
+        console.log("restaurantSeeder done!")
+      })
+      .catch(err => console.log(err))
+      .finally(() => db.close())
   }
-  console.log('done')
-})
 
+})
 
