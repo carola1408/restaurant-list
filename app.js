@@ -63,11 +63,7 @@ app.get('/search', (req, res) => {
     .then((restaurants, keyword) => res.render('index', { restaurants, keyword }))
 })
 
-//應用 params 打造動態路由
-app.get('/:restaurants_id', (req, res) => {
-  const restaurants = restaurantList.results.find(restaurants => restaurants.id.toString() === req.params.restaurants_id)
-  res.render('show', { restaurants: restaurants })
-})
+
 
 //打造瀏覽New頁面路由
 app.get('/restaurants/new', (req, res) => {
