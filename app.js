@@ -8,6 +8,7 @@ const restaurantList = require('./restaurant.json') // 載入 JSON
 const restaurant = require('./models/restaurant') //載入restaurant model
 const bodyParser = require('body-parser')  // 引用 body-parser
 const methodOverride = require('method-override') // 載入 method-override
+const routes = require('./routes')
 
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
@@ -40,15 +41,16 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // 設定每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'))
 
+app.use(routes)
 // 設定首頁路由
-app.get('/', (req, res) => {
-  // pass the restaurant data into 'index' partial template
-  restaurant.find()  // 取出 restaurant model 裡的所有資料
-    .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-    .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
-    .catch(error => console.log(error)) //錯誤處理
+// app.get('/', (req, res) => {
+//   // pass the restaurant data into 'index' partial template
+//   restaurant.find()  // 取出 restaurant model 裡的所有資料
+//     .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
+//     .then(restaurants => res.render('index', { restaurants })) // 將資料傳給 index 樣板
+//     .catch(error => console.log(error)) //錯誤處理
 
-})
+// })
 
 //設定search路由
 app.get('/search', (req, res) => {
