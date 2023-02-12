@@ -7,6 +7,7 @@ const exphbs = require('express-handlebars') // require express-handlebars
 const restaurantList = require('./restaurant.json') // 載入 JSON
 const restaurant = require('./models/restaurant') //載入restaurant model
 const bodyParser = require('body-parser')  // 引用 body-parser
+const methodOverride = require('method-override') // 載入 method-override
 
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
@@ -36,6 +37,9 @@ app.use(express.static('public'))
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// 設定每一筆請求都會透過 methodOverride 進行前置處理
+app.use(methodOverride('_method'))
+
 // 設定首頁路由
 app.get('/', (req, res) => {
   // pass the restaurant data into 'index' partial template
@@ -62,7 +66,6 @@ app.get('/search', (req, res) => {
     })
     .then((restaurants, keyword) => res.render('index', { restaurants, keyword }))
 })
-
 
 
 //打造瀏覽New頁面路由
@@ -107,8 +110,8 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// 控制編輯路由
-app.post('/restaurants/:id/restaurants//edit', (req, res) => {
+// 控制編輯路由;將post改成put
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const name = req.body.name
   const category = req.body.category
@@ -133,8 +136,8 @@ app.post('/restaurants/:id/restaurants//edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// 打造刪除路由
-app.post('/restaurants/:id/delete', (req, res) => {
+// 打造刪除路由;將post改成delete
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id //取得網址上的識別碼，用來查詢使用者想刪除的 To-do
   return restaurant.findById(id) //查詢資料
     .then(restaurant => restaurant.remove()) //刪除這筆資料
