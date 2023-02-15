@@ -29,21 +29,10 @@ router.get('/new', (req, res) => {
 
 //將新增的資料存資料庫
 router.post('/', (req, res) => {
-  const id = req.body.id
-  const name = req.body.name
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
-  // 存入資料庫
-  return restaurant.create({ id, name, name_en, category, image, location, phone, google_map, rating, description })
+  const survey = req.body
+  restaurant.create(survey)
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-
+    .catch(error => console.log('error'))
 })
 
 // 打造資料路由
@@ -65,34 +54,37 @@ router.get('/:id/edit', (req, res) => {
 })
 
 //控制編輯路由; 將post改成put
-router.put('/:id', (req, res) => {
-  const id = req.params.id
-  const name = req.body.name
-  const name_en = req.body.name_en
-  const category = req.body.category
-  const image = req.body.image
-  const location = req.body.location
-  const phone = req.body.phone
-  const google_map = req.body.google_map
-  const rating = req.body.rating
-  const description = req.body.description
+// router.put('/:id', (req, res) => {
+//   const id = req.params.id
+//   const name = req.body.name
+//   const name_en = req.body.name_en
+//   const category = req.body.category
+//   const image = req.body.image
+//   const location = req.body.location
+//   const phone = req.body.phone
+//   const google_map = req.body.google_map
+//   const rating = req.body.rating
+//   const description = req.body.description
 
-  return restaurant.findById(id)
-    .then(restaurant => {
-      restaurant.name = name
-      restaurant.name_en = name_en
-      restaurant.category = category
-      restaurant.image = image
-      restaurant.location = location
-      restaurant.phone = phone
-      restaurant.google_map = google_map
-      restaurant.rating = rating
-      restaurant.description = description
-      return restaurant.save()
-    })
-    .then(() => res.redirect(`/restaurants/${id}`))
-    .catch(error => console.log(error))
-})
+//   return restaurant.findById(id)
+//     .then(restaurant => {
+//       restaurant.name = name
+//       restaurant.name_en = name_en
+//       restaurant.category = category
+//       restaurant.image = image
+//       restaurant.location = location
+//       restaurant.phone = phone
+//       restaurant.google_map = google_map
+//       restaurant.rating = rating
+//       restaurant.description = description
+//       return restaurant.save()
+//     })
+//     .then(() => res.redirect('/'))
+//     .catch(error => console.log(error))
+// })
+// router.put('/:id', (req,res) => {
+//   const id = req.params.id
+// })
 
 // 打造刪除路由;將post改成delete
 router.delete('/:id', (req, res) => {
