@@ -5,7 +5,6 @@ const app = express()
 const port = 3000 // 定義要使用連接埠號(port number) 
 const exphbs = require('express-handlebars') // require express-handlebars 
 const restaurantList = require('./restaurant.json') // 載入 JSON
-const restaurant = require('./models/restaurant') //載入restaurant model
 const bodyParser = require('body-parser')  // 引用 body-parser
 const methodOverride = require('method-override') // 載入 method-override
 const routes = require('./routes')
