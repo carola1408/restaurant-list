@@ -4,22 +4,7 @@ const router = express.Router() // 準備引入路由模組
 
 const restaurant = require('../../models/restaurant') // 引用 restaurant model
 
-//設定search路由
-router.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  restaurant.find()
-    .lean()
-    .then(restaurants => {
-      return restaurants.filter(restaurant => {
-        if (restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase())) {
-          return true
-        } else if (restaurant.category.toLowerCase().includes(req.query.keyword.toLowerCase())) {
-          return true
-        }
-      })
-    })
-    .then((restaurants, keyword) => res.render('index', { restaurants, keyword }))
-})
+
 
 
 //打造瀏覽New頁面路由
@@ -54,37 +39,13 @@ router.get('/:id/edit', (req, res) => {
 })
 
 //控制編輯路由; 將post改成put
-// router.put('/:id', (req, res) => {
-//   const id = req.params.id
-//   const name = req.body.name
-//   const name_en = req.body.name_en
-//   const category = req.body.category
-//   const image = req.body.image
-//   const location = req.body.location
-//   const phone = req.body.phone
-//   const google_map = req.body.google_map
-//   const rating = req.body.rating
-//   const description = req.body.description
-
-//   return restaurant.findById(id)
-//     .then(restaurant => {
-//       restaurant.name = name
-//       restaurant.name_en = name_en
-//       restaurant.category = category
-//       restaurant.image = image
-//       restaurant.location = location
-//       restaurant.phone = phone
-//       restaurant.google_map = google_map
-//       restaurant.rating = rating
-//       restaurant.description = description
-//       return restaurant.save()
-//     })
-//     .then(() => res.redirect('/'))
-//     .catch(error => console.log(error))
-// })
-// router.put('/:id', (req,res) => {
-//   const id = req.params.id
-// })
+router.put('/:id', (req, res) => {
+  const id = req.params.id
+  const survey = req.body
+  restaurant.findByIdAndUpdate(id, survey)
+    .then(() => res.redirect('/'))
+    .catch(error => console.log('error'))
+})
 
 // 打造刪除路由;將post改成delete
 router.delete('/:id', (req, res) => {

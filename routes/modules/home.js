@@ -14,5 +14,21 @@ router.get('/', (req, res) => {
 
 })
 
+//設定search路由
+router.get('/search', (req, res) => {
+  const keyword = req.query.keyword
+  restaurant.find()
+    .lean()
+    .then(restaurants => {
+      return restaurants.filter(restaurant => {
+        if (restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase())) {
+          return true
+        } else if (restaurant.category.toLowerCase().includes(req.query.keyword.toLowerCase())) {
+          return true
+        }
+      })
+    })
+    .then((restaurants, keyword) => res.render('index', { restaurants, keyword }))
+})
 // 匯出路由器
 module.exports = router
