@@ -18,16 +18,24 @@ db.on('error', () => {
   console.log('mongodb error!')
 })
 // 檢查資料快連線狀態，連線正常
+//作法一
 db.once('open', () => {
-  console.log('mongodb connected!')
-  for (let i = 0; i < restaurantList.length; i++) {
-    restaurant.create(restaurantList[i])
-      .then(() => {
-        console.log("restaurantSeeder done!")
-      })
-      .catch(err => console.log(err))
-      .finally(() => db.close())
-  }
-
+  console.log("restaurantSeeder done!")
+  restaurant.create(restaurantList)
+    .catch(err => {
+      console.trace(err)
+    })
+    .finally(() => {
+      db.close()
+    })
 })
 
+//作法二
+// db.once('open', () => {
+//   restaurant.create(restaurantList)
+//     .then(() => {
+//       console.log("restaurantSeeder done!")
+//     })
+//     .catch(err => console.log(err))
+//     .finally(() => db.close())
+// })
