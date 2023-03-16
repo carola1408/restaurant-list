@@ -1,58 +1,60 @@
-<form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST">
-  <h1 class="mb-1 restaurant-show-title">
-    <input type="text" name="name" value="{{restaurant.name}}">
-  </h1>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-10 mx-auto">
+<div class="editPage mt-5 d-flex justify-content-center mb-5">
+  <form action="/restaurants/{{ restaurant._id }}?_method=PUT" method="post" class="col-4">
+    <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
+      style="max-width: 600px;">
+    <div class="form mb-4">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="name" id="name" value="{{ restaurant.name }}" required>
+        <label for="name"><i class="fas fa-utensils pr-2"></i> 名稱 </label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="name_en" id="name_en" value="{{ restaurant.name_en }}">
+        <label for="name"><i class="fas fa-utensils pr-2"></i> 英文名稱</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input class="form-control" name="category" id="category" value="{{ restaurant.category }}" list="categories">
+        <datalist id="categories">
+          <option>美式餐廳</option>
+          <option>義式餐廳</option>
+          <option>日式料理</option>
+          <option>中東餐廳</option>
+          <option>韓式料理</option>
+          <option>咖啡廳</option>
+          <option>酒吧</option>
+          <option>咖啡廳</option>
+          <option>火鍋店</option>
+        </datalist>
+        <label for="category"><i class="fas fa-utensils pr-2"></i> 分類</label>
 
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-utensils pr-2"></i>
-            類別：
-          </span>
-          <input type="text" name="category" value=" {{restaurants.category}}">
-        </p>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="location" id="location" value="{{ restaurant.location }}"
+          required>
+        <label for="location"><i class="fas fa-utensils pr-2"></i> 地址 </label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="url" class="form-control" name="google_map" id="google_map" value="{{ restaurant.google_map }}">
+        <label for="google_map"><i class="fas fa-map-marker-alt pr-2"></i> Google Map 連結</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="tel" class="form-control" name="phone" id="phone" value="{{ restaurant.phone }}">
+        <label for="phone"><i class="fas fa-mobile-alt pr-2"></i> 聯絡電話</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" name="rating" id="rating" value="{{ restaurant.rating }}" max="5"
+          required>
+        <label for="rating"><i class="fa-sharp fa-solid fa-star"></i> 評分 </label>
+      </div>
 
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-utensils pr-2"></i>
-            評價：
-          </span>
-          <input type="text" name="rating" value=" {{restaurants.rating}}">
-        </p>
-
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-map-marker-alt pr-2"></i>
-            地址：
-          </span>
-          <input type="text" name="location" value="{{restaurants.location}}">
-        </p>
-
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-mobile-alt pr-2"></i>
-            電話：
-          </span>
-          <input type="text" name="phone" value=" {{restaurants.phone}}">
-        </p>
-        <p class="mb-1">
-          <span class="text-secondary">
-            <i class="fas fa-mobile-alt pr-2"></i>
-            Google_Map：
-          </span>
-          <input type="text" name="google_map" value=" {{restaurants.google_map}}">
-        </p>
-        <p class="mb-5">
-          <input type="text" name="description" value=" {{restaurants.description}}">
-        </p>
-
-        <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurants.image}}" alt="{{restaurants.name}}"
-          style="max-width: 600px;">
-        <button type="submit" class="btn btn-major ">Save</button>
-        <a href="/" class="btn btn-secondary ">back</a>
+      <div class="form-floating">
+        <textarea class="form-control" name="description" id="description" style="height: 150px;">{{ restaurant.description
+          }}
+        </textarea>
+        <label for="description"> 敘述</label>
       </div>
     </div>
-  </div>
-</form>
+
+    <button type="submit" class="btn btn-major ">確認送出</button>
+    <a href="/" class="btn btn-secondary ">返回首頁</a>
+  </form>
+</div>
