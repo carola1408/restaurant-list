@@ -44,5 +44,10 @@ router.post('/register', (req, res) => {
   })
     .catch(err => console.log(err))
 })
+//加入一條「使用者登出頁面」的路由
+router.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/users/login')
+})
 
 module.exports = router
