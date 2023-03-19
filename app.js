@@ -1,8 +1,7 @@
 // 載入 express 並建構應用程式伺服器
 const express = require('express')
-const port = 3000 // 定義要使用連接埠號(port number) 
+const session = require('express-session') // 載入 session 
 const exphbs = require('express-handlebars') // require express-handlebars 
-const restaurantList = require('./restaurant.json') // 載入 JSON
 const bodyParser = require('body-parser')  // 引用 body-parser
 const methodOverride = require('method-override') // 載入 method-override
 const routes = require('./routes')
@@ -15,6 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 require('./config/mongoose')
 
 const app = express()
+const port = process.env.PORT || 3000 // 定義要使用連接埠號(port number) 
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -22,6 +22,12 @@ app.set('view engine', 'handlebars')
 // setting static files
 app.use(express.static('public'))
 
+//使用 app.use() 註冊套件，並使用 session(option) 來設定相關選項
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 app.use(bodyParser.urlencoded({ extended: true }))
 
