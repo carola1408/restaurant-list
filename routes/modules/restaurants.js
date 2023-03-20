@@ -14,10 +14,10 @@ router.get('/new', (req, res) => {
 
 //將新增的資料存資料庫
 router.post('/', (req, res) => {
-  const survey = req.body
-  restaurant.create(survey)
+  const userId = req.user._id
+  return restaurant.create({ ...req.body, userId })
     .then(() => res.redirect('/'))
-    .catch(error => console.log('error'))
+    .catch(error => console.log(error))
 })
 
 // 打造資料路由
