@@ -47,6 +47,7 @@ router.post('/register', (req, res) => {
 //加入一條「使用者登出頁面」的路由
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '你已經成功登出。')
   res.redirect('/users/login')
 })
 
