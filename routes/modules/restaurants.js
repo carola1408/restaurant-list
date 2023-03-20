@@ -22,8 +22,9 @@ router.post('/', (req, res) => {
 
 // 打造資料路由
 router.get('/:id', (req, res) => {
-  const id = req.params.id
-  return restaurant.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return restaurant.findOne({ _id, userId })
     .lean()
     .then((restaurants) => res.render('detail', { restaurants }))
     .catch(error => console.log(error))
@@ -31,8 +32,9 @@ router.get('/:id', (req, res) => {
 
 // 打造編輯路由
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  return restaurant.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return restaurant.findOne({ _id, userId })
     .lean()
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
@@ -40,17 +42,18 @@ router.get('/:id/edit', (req, res) => {
 
 //控制編輯路由; 將post改成put
 router.put('/:id', (req, res) => {
-  const id = req.params.id
-  const survey = req.body
-  restaurant.findByIdAndUpdate(id, survey)
+  const userId = req.user._id
+  const _id = req.params.id
+  restaurant.findByIdAndUpdate({ _id, userId }, { ...req.body, userId })
     .then(() => res.redirect('/'))
     .catch(error => console.log('error'))
 })
 
 // 打造刪除路由;將post改成delete
 router.delete('/:id', (req, res) => {
-  const id = req.params.id //取得網址上的識別碼，用來查詢使用者想刪除的 To-do
-  return restaurant.findById(id) //查詢資料
+  const userId = req.user._id
+  const _id = req.params.id //取得網址上的識別碼，用來查詢使用者想刪除的 To-do
+  return restaurant.findById({ _id, userId }) //查詢資料
     .then(restaurant => restaurant.remove()) //刪除這筆資料
     .then(() => res.redirect('/')) //重新呼叫首頁
     .catch(error => console.log(error))
