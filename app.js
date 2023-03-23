@@ -15,7 +15,7 @@ const usePassport = require('./config/passport') // 載入 passport
 require('./config/mongoose')
 
 const app = express()
-const port = process.env.PORT || 3000 // 定義要使用連接埠號(port number) 
+const port = process.env.PORT  // 定義要使用連接埠號(port number) 
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -25,7 +25,7 @@ app.use(express.static('public'))
 
 //使用 app.use() 註冊套件，並使用 session(option) 來設定相關選項
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))

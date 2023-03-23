@@ -1,4 +1,5 @@
 const mongoose = require('mongoose') // 載入 mongoose
+
 // 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
