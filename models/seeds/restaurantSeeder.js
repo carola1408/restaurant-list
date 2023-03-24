@@ -6,7 +6,7 @@ const restaurant = require('../restaurant') //載入restaurant model
 const User = require('../user') // 準備引入User model模組
 const db = require('../../config/mongoose')
 const restaurantList = require('../../restaurant.json').results// 載入 JSON
-
+const userList = require('../../user.json')// 載入 JSON
 
 
 // 檢查資料快連線狀態，連線正常
