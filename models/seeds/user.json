@@ -4,6 +4,7 @@
     "email": "user1@example.com",
     "password": "12345678",
     "restaurantIndex": [
+      0,
       1,
       2,
       3
@@ -16,7 +17,8 @@
     "restaurantIndex": [
       4,
       5,
-      6
+      6,
+      7
     ]
   }
 ]
