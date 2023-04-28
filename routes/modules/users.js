@@ -9,10 +9,11 @@ const bcrypt = require('bcryptjs') //引用 bcrypt
 router.get('/login', (req, res) => {
   res.render('login')
 })
-//加入一條「使用者登入頁面」的路由;加入 middleware，驗證 request 登入狀態
+// 加入 middleware，驗證 request 登入狀態
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/users/login'
+  failureRedirect: '/users/login',
+  failureFlash: true
 }))
 //加入一條「使用者登入註冊頁面」的路由
 router.get('/register', (req, res) => {
