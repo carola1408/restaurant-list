@@ -1,7 +1,6 @@
-//設定 todos 路由模組
+//設定 restaurants 路由模組
 const express = require('express') // 引用 Express 與 Express 路由器
 const router = express.Router() // 準備引入路由模組
-
 const Restaurant = require('../../models/restaurant') // 引用 restaurant model
 
 

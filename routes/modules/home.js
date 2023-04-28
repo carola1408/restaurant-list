@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
   // user has own foodie list
   const userId = req.user._id
 
-  RestaurantList.find({ userId })
+  Restaurant.find({ userId })
     .lean()
     .sort(sortBy[sort])
     .then(restaurants => {
