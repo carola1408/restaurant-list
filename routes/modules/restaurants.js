@@ -45,7 +45,7 @@ router.put('/:id', (req, res) => {
   const _id = req.params.id
   Restaurant.findByIdAndUpdate({ _id, userId }, { ...req.body, userId })
     .then(() => res.redirect('/'))
-    .catch(error => console.log('error'))
+    .catch(error => console.log(error))
 })
 
 // 打造刪除路由;將post改成delete
