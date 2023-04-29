@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   const userId = req.user._id   // 變數設定
   Restaurant.find({ userId })  // 取出 restaurant model 裡的所有資料
     .lean()  // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
-    .sort({ _id: 'asc', category: 'desc', location: 'asc' }) // 新增這裡：排序
+    .sort({ _id: 'asc' }) // 新增這裡：排序
     .then((restaurants) => res.render('index', { restaurants })) // 將資料傳給 index 樣板
     .catch(error => console.log(error)) //錯誤處理
 
@@ -19,14 +19,14 @@ router.get('/', (req, res) => {
 //設定search路由
 router.get('/search', (req, res) => {
   const keyword = req.query.keyword
-
-  Restaurant.find()
+  const userId = req.user._id
+  Restaurant.find(userId)
     .lean()
     .then(restaurants => {
       return restaurants.filter(restaurant => {
-        if (restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase())) {
+        if (restaurant.name.toLowerCase().includes(keyword.toLowerCase())) {
           return true
-        } else if (restaurant.category.toLowerCase().includes(req.query.keyword.toLowerCase())) {
+        } else if (restaurant.category.toLowerCase().includes(keyword.toLowerCase())) {
           return true
         }
       })
