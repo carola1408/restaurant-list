@@ -19,10 +19,12 @@
           排序
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/?searchKeyword={{searchKeyword}}&sortField=name&sortOrder=asc">A > Z </a>
-          <a class="dropdown-item" href="/?searchKeyword={{searchKeyword}}&sortField=name&sortOrder=desc">Z > A </a>
-          <a class="dropdown-item" href="/?searchKeyword={{searchKeyword}}&sortField=rating&sortOrder=desc">餐廳評分</a>
-          <a class="dropdown-item" href="/?searchKeyword={{searchKeyword}}&sortField=category&sortOrder=asc">餐廳類別</a>
+          <select class="form-select" name="sort" id="sort">
+            <option>A > Z</option>
+            <option>Z > A</option>
+            <option>類別</option>
+            <option>地區</option>
+          </select>
 
         </div>
       </form>
@@ -37,7 +39,7 @@
   <div class="row">
 
     <div class="col-md-10 col-12 mx-auto">
-     
+
       <div class="row row-cols-sm-3">
         {{#each restaurants}}
         <div class="card mb-3 py-2">
