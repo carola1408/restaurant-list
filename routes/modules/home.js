@@ -19,8 +19,7 @@ router.get('/', (req, res) => {
 //設定search路由
 router.get('/search', (req, res) => {
   const keyword = req.query.keyword
-  const userId = req.user._id
-  Restaurant.find(userId)
+  Restaurant.find()
     .lean()
     .then(restaurants => {
       return restaurants.filter(restaurant => {
