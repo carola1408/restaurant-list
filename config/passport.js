@@ -27,9 +27,9 @@ module.exports = app => {
   }))
 
   passport.use(new FacebookStrategy({
-    clientID: 'process.env.FACEBOOK_ID',
-    clientSecret: 'process.env.FACEBOOK_SECRET',
-    callbackURL: 'process.env.FACEBOOK_CALLBACK',
+    clientID: process.env.FACEBOOK_ID,
+    clientSecret: process.env.FACEBOOK_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK,
     profileFields: ['email', 'displayName']
   },
     (accessToken, refreshToken, profile, done) => {
@@ -37,7 +37,7 @@ module.exports = app => {
       User.findOne({ email })
         .then(user => {
           if (user) return done(null, user)
-          //從36個英文字母和數字組成的字串中隨機取出只取後面8位數字,做成隨機密碼
+          //從36個英文字母和數字組成的字串中隨機取出只取後面8位數字,做成隨機密碼(A~Z, 0~9)
           const randomPassword = Math.random().toString(36).slice(-8)
           bcrypt
             .genSalt(10) // 產生「鹽」，並設定複雜度係數為 10
