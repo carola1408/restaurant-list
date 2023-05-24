@@ -44,7 +44,7 @@ router.post('/register', (req, res) => {
     // 如果已經註冊：退回原本畫面
     if (user) {
       errors.push({ message: '這個 Email 已經註冊過了。' })
-      res.render('register', {
+      return res.render('register', {
         name,
         email,
         password,
